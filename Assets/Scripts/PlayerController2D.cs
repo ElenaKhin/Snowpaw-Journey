@@ -5,28 +5,26 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Refs")]
-    public Animator animator;         // optional
-    public Transform groundCheck;     // empty child at feet
-    public LayerMask groundLayer;     // set to Ground layer
-    public Transform firePoint;       // empty child at barrel/front
-    public GameObject bulletPrefab;   // prefab with Bullet2D script
+    public Animator animator;              // optional
+    public Transform groundCheck;          // empty child at feet
+    public LayerMask groundLayer;          // set to Ground layer
+    public Transform firePoint;            // optional, muzzle tip
 
     [Header("Movement")]
     public float moveSpeed = 8f;
     public float jumpForce = 14f;
     public float groundCheckRadius = 0.15f;
-    public int maxAirJumps = 0;       // set to 1 for double jump, etc.
+    public int maxAirJumps = 0;            // set to 1 for double jump, etc.
 
     [Header("Shooting")]
-    public float fireRate = 8f;       // bullets per second
-    public float bulletSpeed = 16f;
+    public ProjectileBehaviour ProjectilePrefab;  // prefab with ProjectileBehaviour (has Launch(Vector2))
+    public Transform LaunchOffset;                // preferred muzzle transform
 
     Rigidbody2D rb;
     int airJumpsUsed = 0;
     float xInput;
     bool jumpPressed;
     bool facingRight = true;
-    float nextShotTime;
 
     void Awake()
     {
@@ -43,10 +41,11 @@ public class PlayerController2D : MonoBehaviour
         // jump input (edge)
         if (Input.GetButtonDown("Jump")) jumpPressed = true;
 
-        // shoot input (hold)
-        if (Input.GetButton("Fire1")) TryShoot();
+        // shoot once per click
+        if (Input.GetButtonDown("Fire1"))
+            Shoot();
 
-        // flip visual
+        // face movement direction
         if (xInput > 0 && !facingRight) Flip();
         else if (xInput < 0 && facingRight) Flip();
 
@@ -90,26 +89,37 @@ public class PlayerController2D : MonoBehaviour
 
     bool IsGrounded()
     {
+        if (!groundCheck) return false;
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
-    void TryShoot()
+    void Shoot()
     {
-        if (Time.time < nextShotTime || bulletPrefab == null || firePoint == null) return;
-        nextShotTime = Time.time + 1f / fireRate;
+        if (ProjectilePrefab == null) return;
 
-        GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        float dir = facingRight ? 1f : -1f;
+        // choose spawn transform
+        Transform spawn = LaunchOffset ? LaunchOffset : (firePoint ? firePoint : transform);
 
-        // launch
-        var bullet = b.GetComponent<Bullet2D>();
-        if (bullet) bullet.Launch(new Vector2(dir * bulletSpeed, 0f));
-        else
+        // direction from facing (independent of prefab rotation)
+        Vector2 dir = facingRight ? Vector2.right : Vector2.left;
+
+        // spawn a bit ahead (and slightly above) to avoid overlapping the player/ground
+        const float forwardPad = 0.35f;
+        const float upPad = 0.02f;
+        Vector2 spawnPos = (Vector2)spawn.position + dir * forwardPad + Vector2.up * upPad;
+
+        var proj = Instantiate(ProjectilePrefab, spawnPos, Quaternion.identity);
+
+        // ignore collisions with our own colliders (prevents instant pop)
+        var projCol = proj.GetComponent<Collider2D>();
+        if (projCol)
         {
-            // fallback if no script: push via RB2D
-            var rb2 = b.GetComponent<Rigidbody2D>();
-            if (rb2) rb2.velocity = new Vector2(dir * bulletSpeed, 0f);
+            foreach (var myCol in GetComponentsInChildren<Collider2D>())
+                Physics2D.IgnoreCollision(projCol, myCol, true);
         }
+
+        // drive the bullet by vector (no reliance on transform.right)
+        proj.Launch(dir);
     }
 
     void Flip()
