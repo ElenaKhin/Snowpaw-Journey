@@ -1,51 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-   public static bool GameIsPaused = false;
-   public GameObject pauseMenuUI;
+    public static bool GameIsPaused = false;
 
-   // Update is called once per frame
-   void Update()
-   {
-       if (Input.GetKeyDown(KeyCode.Escape)) 
-       {
-           if (GameIsPaused)
-           {
-               Resume();
-           } 
-           else
-           {
-               Pause();
-           }
-       } 
-   }
+    [Header("UI")]
+    [SerializeField] private GameObject pauseMenuUI;
 
-   public void Resume()
-   {
-       pauseMenuUI.SetActive(false); // ✅ capital S
-       Time.timeScale = 1f;
-       GameIsPaused = false;
-   }
+    [Header("Audio")]
+    [SerializeField] private AudioManager audioManager;   // drag in Inspector, or auto-find
 
-   void Pause()
-   {
-       pauseMenuUI.SetActive(true); // ✅ capital S
-       Time.timeScale = 0f;
-       GameIsPaused = true;
-   }
-   public void LoadMenu()
-   {
-        SceneManager.LoadScene("MainMenu");
+    private void Awake()
+    {
+        if (!audioManager) audioManager = FindObjectOfType<AudioManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameIsPaused) Resume();
+            else Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+
+        // resume bgm
+        if (audioManager) audioManager.ResumeMusic();
+    }
+
+    public void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+
+        // pause bgm
+        if (audioManager) audioManager.PauseMusic();
+    }
+
+    public void LoadMenu()
+    {
+        // make sure time runs in the next scene
         Time.timeScale = 1f;
 
-   }
-   public void QuitGame()
-   {
-        Debug.Log("QuttingGame");
+        // optional: resume/stop music depending on your menu design
+        if (audioManager) audioManager.ResumeMusic();
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game");
         Application.Quit();
-   }
+    }
+
+    // Optional: hook this to your UI Button OnClick to play a click sound
+    public void PlayClickSFX()
+    {
+        if (audioManager) audioManager.PlayClick();
+    }
 }
