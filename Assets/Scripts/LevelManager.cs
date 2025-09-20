@@ -58,7 +58,6 @@ public class LevelManager : MonoBehaviour
         Transform end = chunk.transform.Find("EndPoint");
         if (end != null)
         {
-            Debug.Log("EndPoint found: " + end.name + " at " + end.position);
             return end;
         }
 
@@ -71,8 +70,6 @@ public class LevelManager : MonoBehaviour
                 return t;
             }
         }
-
-        Debug.LogError("EndPoint not found in chunk: " + chunk.name);
         return null;
     }
 
