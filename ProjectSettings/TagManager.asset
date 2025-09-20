@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Tiles
+  - 
   - Water
   - UI
-  - Trees
-  - Bullet
+  - 
+  - 
   - 
   - 
   - 
@@ -41,6 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
+  - name: 1Sky
     uniqueID: 2270369615
+    locked: 0
+  - name: 2Cloud
+    uniqueID: 122571913
+    locked: 0
+  - name: 3Background
+    uniqueID: 851730695
+    locked: 0
+  - name: 4Foreground
+    uniqueID: 1627825757
+    locked: 0
+  - name: Player
+    uniqueID: 396468107
     locked: 0
