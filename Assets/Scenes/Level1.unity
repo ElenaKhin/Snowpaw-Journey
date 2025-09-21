@@ -2406,19 +2406,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1821815720}
-  groundCheck: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
-  firePoint: {fileID: 1821815719}
+    m_Bits: 64
+  firePoint: {fileID: 0}
   moveSpeed: 8
-  jumpForce: 12
-  groundCheckRadius: 0.15
-  maxAirJumps: 0
-  ProjectilePrefab: {fileID: -4866311421262707768, guid: c05b5d4d8d9af4ee4b1bd9d7d769a7b8, type: 3}
-  LaunchOffset: {fileID: 2105376353}
-  groundProbeDistance: 0.08
-  groundProbeInset: {x: 0.05, y: 0.1}
+  jumpForce: 14
+  maxAirJumps: 1
+  groundProbeDistance: 0.1
+  groundProbeInset: {x: 0.05, y: 0.05}
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   respawnPoint: {fileID: 0}
