@@ -307,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundStone
       objectReference: {fileID: 0}
+    - target: {fileID: 2178862171704580757, guid: 34ad4a514eb0c46558ea3f2f36af8ec4, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3797544875064007757, guid: 34ad4a514eb0c46558ea3f2f36af8ec4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.18382104

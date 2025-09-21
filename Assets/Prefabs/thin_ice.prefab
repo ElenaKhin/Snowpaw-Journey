@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3797544875064007757}
   - component: {fileID: 7526458198600130099}
   - component: {fileID: 8669181687297137760}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: thin_ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1627825757
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1025023285, guid: cd0dbe72e27cb4353b586f757c299363, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
