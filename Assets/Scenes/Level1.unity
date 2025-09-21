@@ -2410,16 +2410,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   firePoint: {fileID: 0}
-  moveSpeed: 8
+  moveSpeed: 4
   jumpForce: 14
   maxAirJumps: 1
   groundProbeDistance: 0.1
   groundProbeInset: {x: 0.05, y: 0.05}
-  coyoteTime: 0.1
-  jumpBufferTime: 0.1
-  respawnPoint: {fileID: 0}
-  fallYThreshold: -10
-  respawnInvulnTime: 0.2
+  attackRange: 0.5
+  attackDamage: 1
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!70 &1821815724
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

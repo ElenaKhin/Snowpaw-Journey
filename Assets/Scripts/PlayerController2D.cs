@@ -26,7 +26,13 @@ public class PlayerController2D : MonoBehaviour
     [Header("Respawn")]
     public Transform respawnPoint;         
     public float fallYThreshold = -10f;    
-    public float respawnInvulnTime = 0.2f; 
+    public float respawnInvulnTime = 0.2f;
+
+    [Header("Attack")]
+    public float attackRange = 0.5f;
+    public int attackDamage = 1;
+    public LayerMask enemyLayers;
+
 
     Rigidbody2D rb;
     Collider2D col;
@@ -99,6 +105,13 @@ public class PlayerController2D : MonoBehaviour
             if (HasParam("YVel", AnimatorControllerParameterType.Float))
                 animator.SetFloat("YVel", rb.velocity.y);
         }
+        // Attack input (Enter key)
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (animator && HasParam("Attack", AnimatorControllerParameterType.Trigger))
+                animator.SetTrigger("Attack");
+        }
+
     }
 
     void FixedUpdate()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3797544875064007757}
   - component: {fileID: 7526458198600130099}
   - component: {fileID: 8669181687297137760}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: GroundStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
