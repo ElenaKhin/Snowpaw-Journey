@@ -34,6 +34,7 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask enemyLayers;
 
 
+
     Rigidbody2D rb;
     Collider2D col;
 
@@ -58,6 +59,8 @@ public class PlayerController2D : MonoBehaviour
         if (rb.gravityScale <= 0f) rb.gravityScale = 3f;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+
     }
 
     void Update()
