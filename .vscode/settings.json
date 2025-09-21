@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Snowpaw's Journey.sln"
+    "dotnet.defaultSolution": "Snowpaw-Journey.sln"
 }
