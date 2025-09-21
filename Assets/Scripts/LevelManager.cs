@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     public GameObject[] chunkPrefabs;    // Other chunks to spawn randomly
 
     [Header("Settings")]
-    public int initialChunks = 5;        // How many chunks to spawn at start
+    public int initialChunks = 8;        // How many chunks to spawn at start
     public float firstChunkY = -5.6f;    // Y position for initial chunk
     public float otherChunksY = -5.6f;  // Y position for other chunks
 

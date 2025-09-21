@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3167026962114452847}
   - component: {fileID: 4015278738647191288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: icestone_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
