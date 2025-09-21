@@ -106,11 +106,12 @@ public class PlayerController2D : MonoBehaviour
                 animator.SetFloat("YVel", rb.velocity.y);
         }
         // Attack input (Enter key)
+        // Attack input (Enter key)
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (animator && HasParam("Attack", AnimatorControllerParameterType.Trigger))
-                animator.SetTrigger("Attack");
+            DoAttack();
         }
+
 
     }
 
@@ -138,6 +139,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     void DoJump()
+
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -146,6 +148,32 @@ public class PlayerController2D : MonoBehaviour
 
         if (animator && HasParam("Jump", AnimatorControllerParameterType.Trigger))
             animator.SetTrigger("Jump");
+    }
+    void DoAttack()
+    {
+        if (animator && HasParam("Attack", AnimatorControllerParameterType.Trigger))
+            animator.SetTrigger("Attack");
+
+        // Detect enemies in range
+        Collider2D[] hits = Physics2D.OverlapCircleAll(firePoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D hit in hits)
+        {
+            EnemyHealth enemy = hit.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        // Optional: reduce player health here
+
+        // Trigger hurt animation
+        if (animator != null && HasParam("Hurt", AnimatorControllerParameterType.Trigger))
+            animator.SetTrigger("Hurt");
     }
 
     bool CheckGrounded()
