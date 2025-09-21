@@ -33,6 +33,8 @@ public class PlayerController2D : MonoBehaviour
     public int attackDamage = 1;
     public LayerMask enemyLayers;
 
+    [Header("Game Manager")]
+    public GameManager GameManager;
 
 
     Rigidbody2D rb;
@@ -52,6 +54,7 @@ public class PlayerController2D : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+    
 
     void Start()
     {
@@ -200,8 +203,22 @@ public class PlayerController2D : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died!");
-        // You can add respawn, death animation, etc.
+
+        // Stop player movement (optional)
+        rb.velocity = Vector2.zero;
+        this.enabled = false; // disable this script so player can't move
+
+        // Trigger Game Over via GameManager
+        if (GameManager != null)
+        {
+            GameManager.GameOver();
+        }
+
+        // Optional: play death animation
+        if (animator && HasParam("Dead", AnimatorControllerParameterType.Trigger))
+            animator.SetTrigger("Dead");
     }
+
 
     bool CheckGrounded()
     {
