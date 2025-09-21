@@ -26,7 +26,9 @@ public class PlayerController2D : MonoBehaviour
     [Header("Respawn")]
     public Transform respawnPoint;         
     public float fallYThreshold = -10f;    
-    public float respawnInvulnTime = 0.2f; 
+    public float respawnInvulnTime = 0.2f;
+
+
 
     Rigidbody2D rb;
     Collider2D col;
