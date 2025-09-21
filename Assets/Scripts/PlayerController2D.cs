@@ -139,7 +139,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     void DoJump()
-    
+
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -165,6 +165,15 @@ public class PlayerController2D : MonoBehaviour
                 enemy.TakeDamage(attackDamage);
             }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        // Optional: reduce player health here
+
+        // Trigger hurt animation
+        if (animator != null && HasParam("Hurt", AnimatorControllerParameterType.Trigger))
+            animator.SetTrigger("Hurt");
     }
 
     bool CheckGrounded()

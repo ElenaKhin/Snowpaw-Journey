@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5742656711220952465}
   - component: {fileID: 8818923604214170297}
+  - component: {fileID: 5814010963388639476}
+  - component: {fileID: 7920419177908152693}
   m_Layer: 0
   m_Name: icespike
   m_TagString: Untagged
@@ -70,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1627825757
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 767635333, guid: cd0dbe72e27cb4353b586f757c299363, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,3 +86,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &5814010963388639476
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558422936414698642}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6875, y: 1.34375}
+    newSize: {x: 1.6875, y: 1.34375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.6875, y: 0.515625}
+      - {x: -0.84375, y: 0.515625}
+      - {x: -0.7898674, y: 0.18693137}
+      - {x: -0.7273673, y: -0.09431863}
+      - {x: -0.48388305, y: -0.25735253}
+      - {x: -0.3125, y: -0.546875}
+      - {x: -0.0625, y: -0.609375}
+      - {x: 0.28138852, y: -0.5551098}
+      - {x: 0.4617641, y: -0.38811904}
+      - {x: 0.65439445, y: -0.09584436}
+      - {x: 0.68265647, y: 0.16472349}
+      - {x: 0.84375, y: 0.265625}
+      - {x: 0.84375, y: 0.453125}
+  m_UseDelaunayMesh: 0
+--- !u!114 &7920419177908152693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558422936414698642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fff29c31946c4668826479d71737b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
