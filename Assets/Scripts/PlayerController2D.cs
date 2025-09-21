@@ -33,6 +33,8 @@ public class PlayerController2D : MonoBehaviour
     public int attackDamage = 1;
     public LayerMask enemyLayers;
 
+    [Header("Game Manager")]
+    public GameManager GameManager;
 
 
     Rigidbody2D rb;
@@ -52,6 +54,7 @@ public class PlayerController2D : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+    
 
     void Start()
     {
