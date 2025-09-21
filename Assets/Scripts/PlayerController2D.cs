@@ -48,6 +48,17 @@ public class PlayerController2D : MonoBehaviour
     float jumpBufferTimer = 0f;
     bool respawning = false;
 
+    public int maxHealth = 10;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -114,8 +125,6 @@ public class PlayerController2D : MonoBehaviour
         {
             DoAttack();
         }
-
-
     }
 
     void FixedUpdate()
@@ -172,11 +181,26 @@ public class PlayerController2D : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        // Optional: reduce player health here
+        currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0); // Prevent negative health
 
-        // Trigger hurt animation
-        if (animator != null && HasParam("Hurt", AnimatorControllerParameterType.Trigger))
+        // Update health bar
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
+
+        // Play hurt animation if available
+        if (animator && HasParam("Hurt", AnimatorControllerParameterType.Trigger))
             animator.SetTrigger("Hurt");
+
+        // Optional: check death
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died!");
+        // You can add respawn, death animation, etc.
     }
 
     bool CheckGrounded()
