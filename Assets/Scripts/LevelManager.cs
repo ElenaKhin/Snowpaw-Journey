@@ -4,12 +4,13 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Chunks")]
     public GameObject firstChunk;        // Initial chunk
-    public GameObject[] chunkPrefabs;    // Other chunks to spawn randomly
+    public GameObject[] chunkPrefabs;    // Middle chunks to spawn randomly
+    public GameObject finalChunk;        // Final chunk (ending)
 
     [Header("Settings")]
-    public int initialChunks = 8;        // How many chunks to spawn at start
-    public float firstChunkY = -5.6f;    // Y position for initial chunk
-    public float otherChunksY = -5.6f;  // Y position for other chunks
+    public int middleChunks = 6;         // How many random middle chunks
+    public float firstChunkY = -6f;    // Y position for initial chunk
+    public float otherChunksY = -6f;   // Y position for other chunks
 
     private float nextChunkX = 0f;       // Tracks where next chunk should spawn
 
@@ -18,11 +19,17 @@ public class LevelManager : MonoBehaviour
         // Spawn the first chunk
         SpawnChunk(firstChunk, firstChunkY);
 
-        // Spawn remaining chunks
-        for (int i = 1; i < initialChunks; i++)
+        // Spawn middle random chunks
+        for (int i = 0; i < middleChunks; i++)
         {
             int rand = Random.Range(0, chunkPrefabs.Length);
             SpawnChunk(chunkPrefabs[rand], otherChunksY);
+        }
+
+        // Spawn the final chunk
+        if (finalChunk != null)
+        {
+            SpawnChunk(finalChunk, otherChunksY);
         }
     }
 
@@ -44,33 +51,22 @@ public class LevelManager : MonoBehaviour
         float leftOffset = 0f;
         if (sr != null)
         {
-            leftOffset = sr.bounds.size.x * 0.5f; // distance from center to left edge
+            leftOffset = sr.bounds.size.x * 0.5f;
         }
 
         // Position next chunk at EndPoint + leftOffset
         nextChunkX += (endPoint.position.x - chunk.transform.position.x) + leftOffset;
     }
 
-
     Transform FindEndPoint(GameObject chunk)
     {
-        // Try direct child first
         Transform end = chunk.transform.Find("EndPoint");
-        if (end != null)
-        {
-            return end;
-        }
+        if (end != null) return end;
 
-        // Search recursively in all children
         foreach (Transform t in chunk.GetComponentsInChildren<Transform>())
         {
-            if (t.name == "EndPoint")
-            {
-                Debug.Log("EndPoint found in child: " + t.name + " at " + t.position);
-                return t;
-            }
+            if (t.name == "EndPoint") return t;
         }
         return null;
     }
-
 }
