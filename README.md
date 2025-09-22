@@ -8,16 +8,19 @@ Snowpaw Journey is a 2D platformer game developed in Unity. Players control a ca
 ## 📸 Screenshots
 
 ### Main Menu
-![Main Menu](screenshots/mainmenu.png)
+![Main Menu](screenshots/MainMenu.png)
 
 ### Gameplay
-![Gameplay](screenshots/gameplay.png)
+![Gameplay](screenshots/Map.png)
+
+### Pause Menu
+![Game Over](screenshots/PauseMenu.png)
 
 ### Game Over
-![Game Over](screenshots/gameover.png)
+![Game Over](screenshots/GameOver.png)
 
 ### Win Screen
-![Win Screen](screenshots/winmenu.png)
+![Win Screen](screenshots/GameWin.png)
 
 ---
 
