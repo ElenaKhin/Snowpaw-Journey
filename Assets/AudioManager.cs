@@ -11,8 +11,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip click;
     [SerializeField] private AudioClip hurt;
-    [SerializeField] private AudioClip jump;
-    [SerializeField] private AudioClip shoot;
+    [SerializeField] private AudioClip attack;
+    [SerializeField] private AudioClip enemyHurt;
+    [SerializeField] private AudioClip gameOver;
+
+
 
     private void Start()
     {
@@ -20,6 +23,9 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = background;
             musicSource.loop = true;
+
+            // Reduce volume here
+            musicSource.volume = 0.1f; // 30% of max volume
             musicSource.Play();
         }
     }
@@ -51,6 +57,8 @@ public class AudioManager : MonoBehaviour
     public void PlayClick() => PlaySFX(click);
     public void PlayDeath() => PlaySFX(death);
     public void PlayHurt()  => PlaySFX(hurt);
-    public void PlayJump()  => PlaySFX(jump);
-    public void PlayShoot() => PlaySFX(shoot);
+    public void PlayAttack()  => PlaySFX(attack);
+    public void PlayEnemyHurt() => PlaySFX(enemyHurt);
+    public void PlayGameOver() => PlaySFX(gameOver);
+
 }

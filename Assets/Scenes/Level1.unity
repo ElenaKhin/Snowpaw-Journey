@@ -1238,9 +1238,9 @@ MonoBehaviour:
   background: {fileID: 8300000, guid: d47302b238c864bc8be392eb691529e3, type: 3}
   death: {fileID: 0}
   click: {fileID: 0}
-  hurt: {fileID: 0}
-  jump: {fileID: 0}
-  shoot: {fileID: 0}
+  hurt: {fileID: 8300000, guid: c7d25f5c2f0294197afe688ae315b493, type: 3}
+  attack: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  enemyHurt: {fileID: 8300000, guid: 566d2ea6240b489479a6e9fd608c2621, type: 3}
 --- !u!4 &514499416
 Transform:
   m_ObjectHideFlags: 0
@@ -4319,6 +4319,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   GameManager: {fileID: 1786933315}
+  audioManager: {fileID: 514499415}
   maxHealth: 10
   currentHealth: 0
   healthBar: {fileID: 1507637945}

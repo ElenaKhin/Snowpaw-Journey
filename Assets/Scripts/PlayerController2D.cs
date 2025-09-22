@@ -36,6 +36,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Game Manager")]
     public GameManager GameManager;
 
+    [Header("Audio")]
+    [SerializeField] private AudioManager audioManager;
 
     Rigidbody2D rb;
     Collider2D col;
@@ -74,7 +76,8 @@ public class PlayerController2D : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-
+        if (!audioManager)
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -169,6 +172,8 @@ public class PlayerController2D : MonoBehaviour
         if (animator && HasParam("Attack", AnimatorControllerParameterType.Trigger))
             animator.SetTrigger("Attack");
 
+        audioManager.PlayAttack();
+
         // Detect enemies in range
         Collider2D[] hits = Physics2D.OverlapCircleAll(firePoint.position, attackRange, enemyLayers);
 
@@ -178,6 +183,7 @@ public class PlayerController2D : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage);
+                audioManager.PlayEnemyHurt();
             }
         }
     }
@@ -190,6 +196,8 @@ public class PlayerController2D : MonoBehaviour
         // Update health bar
         if (healthBar != null)
             healthBar.SetHealth(currentHealth);
+
+        audioManager.PlayHurt();
 
         // Play hurt animation if available
         if (animator && HasParam("Hurt", AnimatorControllerParameterType.Trigger))
@@ -210,6 +218,7 @@ public class PlayerController2D : MonoBehaviour
         // Play death animation
         if (animator && HasParam("Dead", AnimatorControllerParameterType.Trigger))
             animator.SetTrigger("Dead");
+        audioManager.PlayDeath();
 
         // Delay GameOver until after animation (e.g., 1s)
         StartCoroutine(ShowGameOverAfterDelay(0.8f));
