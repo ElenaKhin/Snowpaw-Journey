@@ -288,4 +288,24 @@ public class PlayerController2D : MonoBehaviour
             if (p.name == name && p.type == type) return true;
         return false;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Final"))
+        {
+            Debug.Log("Player reached the final (collision)!");
+            if (GameManager != null)
+                GameManager.WinGame();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Final"))
+        {
+            Debug.Log("Player reached the final (trigger)!");
+            if (GameManager != null)
+                GameManager.WinGame();
+        }
+    }
 }

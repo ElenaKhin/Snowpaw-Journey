@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth = 2;
     int currentHealth;
 
     Animator animator;

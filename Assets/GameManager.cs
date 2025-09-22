@@ -6,16 +6,17 @@ public class GameManager : MonoBehaviour
     [Header("UI Panels (will auto-find)")]
     private GameObject pauseMenuUI;
     private GameObject gameOverUI;
+    private GameObject winMenuUI;
 
     [Header("Audio")]
     [SerializeField] private AudioManager audioManager;
 
     [HideInInspector] public bool GameIsPaused = false;
     [HideInInspector] public bool GameIsOver = false;
+    [HideInInspector] public bool GameIsWon = false;
 
     private void Awake()
     {
-        // Auto-find AudioManager if not assigned
         if (!audioManager)
             audioManager = FindObjectOfType<AudioManager>();
     }
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         // Reset states
         GameIsOver = false;
         GameIsPaused = false;
+        GameIsWon = false;
         Time.timeScale = 1f;
 
         // Auto-find panels in the scene
@@ -33,12 +35,16 @@ public class GameManager : MonoBehaviour
         {
             pauseMenuUI = canvas.transform.Find("PauseMenu")?.gameObject;
             gameOverUI = canvas.transform.Find("GameOverMenu")?.gameObject;
+            winMenuUI = canvas.transform.Find("WinMenu")?.gameObject;
 
             if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
             else Debug.LogWarning("PauseMenu not found under Canvas!");
 
             if (gameOverUI != null) gameOverUI.SetActive(false);
             else Debug.LogWarning("GameOverMenu not found under Canvas!");
+
+            if (winMenuUI != null) winMenuUI.SetActive(false);
+            else Debug.LogWarning("WinMenu not found under Canvas!");
         }
         else
         {
@@ -48,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameIsOver) return;
+        if (GameIsOver || GameIsWon) return;
 
         // Pause toggle
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -87,11 +93,25 @@ public class GameManager : MonoBehaviour
 
         if (audioManager) audioManager.PauseMusic();
     }
+    #endregion
 
+    #region Win
+    public void WinGame()
+    {
+        GameIsWon = true;
+        if (winMenuUI) winMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+
+        if (audioManager) audioManager.PauseMusic();
+    }
+    #endregion
+
+    #region Scene Control
     public void RetryLevel()
     {
         Time.timeScale = 1f;
         GameIsOver = false;
+        GameIsWon = false;
         SceneManager.LoadScene("Level1");
     }
 
@@ -99,6 +119,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameIsOver = false;
+        GameIsWon = false;
         SceneManager.LoadScene("MainMenu");
     }
     #endregion

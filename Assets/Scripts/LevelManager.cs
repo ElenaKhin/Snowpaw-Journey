@@ -19,11 +19,11 @@ public class LevelManager : MonoBehaviour
         // Spawn the first chunk
         SpawnChunk(firstChunk, firstChunkY);
 
-        // Spawn middle random chunks
-        for (int i = 0; i < middleChunks; i++)
+        // Spawn middle chunks in order
+        int chunksToSpawn = Mathf.Min(middleChunks, chunkPrefabs.Length);
+        for (int i = 0; i < chunksToSpawn; i++)
         {
-            int rand = Random.Range(0, chunkPrefabs.Length);
-            SpawnChunk(chunkPrefabs[rand], otherChunksY);
+            SpawnChunk(chunkPrefabs[i], otherChunksY);
         }
 
         // Spawn the final chunk
